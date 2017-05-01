@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Profile Page{% endblock %}
+{% block css_files %}{% load staticfiles %}{% endblock %}
+{% block body %}
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}"><b>UR8</b></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="navbar-text"> |</li>
+          <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <li class="navbar-text">
+            {% if request.user.profile.image == 'avatar/None/default_avatar.png' %}
+              <img src="{% static request.user.profile.image %}" width="25" height="25">  Welcome {{ request.user.username }} !
+            {% else %}
+              <img src="{{ request.user.profile.image.url }}" width="25" height="25">  Welcome {{ request.user.username }} !
+            {% endif %}
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'sign_up' %}"><span class="glyphicon glyphicon-edit"></span> Sign Up</a></li>
+          <li class="active"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+          <li><a href="{% url 'sign_out' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1>Profile of: <i>{{ request.user.username }}</i></h1>
+  <hr>
+  <br>
+  <p></p>
+  <br>
+
+  <p><b>Profile Image: </b></p>
+  <br>
+  {% if request.user.profile.image == 'avatar/None/default_avatar.png'%}
+    <img src="{% static request.user.profile.image %}" width="250" height="250">
+  {% else %}
+    <img src="{{ request.user.profile.image.url }}" width="250" height="250">
+  {% endif %}
+  <br>
+  <p></p>
+  <hr>
+
+  <p>Change Avatar <a href="{% url 'edit_avatar' %}"><b>here</b></a>.</p>
+  <p>Change Password <a href="{% url 'reset_pwd' %}"><b>here</b></a>.</p>
+
+{% endblock %}
