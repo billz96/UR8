@@ -41,14 +41,16 @@ def edit_avatar(request):
     elif request.method == 'POST' and request.user.is_authenticated():
         form = EditAvatarForm(request.POST, request.FILES)
         if form.is_valid():
+            def_img = "avatar/None/default_avatar.png"
             new_image = form.cleaned_data["image"]
-            profile = request.user.profile
-            if (profile.image != new_image) and (new_image != None):
+            if def_img == new_image:
+                error = "You haven't selected any image. Please try again."
+                return render(request, 'edit_avatar.html', {'form':form, 'error':error})
+            else:
+                profile = request.user.profile
                 profile.image = new_image
                 profile.save()
                 return render(request, 'home.html', {})
-            else:
-                return render(request, 'edit_avatar.html', {'form':form})
         else:
             return render(request, 'edit_avatar.html', {'form':form})
     else:
