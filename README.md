@@ -1,5 +1,13 @@
 # UR8
 The hippest and hoppest.
 
-In this project our team will be creating a simple and beatiful YouTube **_`clone`_**.
+In this project our team will be creating a simple and beautiful YouTube **_`clone`_**.
+It will include:
+- Video Rating
+- Video Review
+- Recommended Videos
+- Image Uploading
+- Video Uploading
+- Password Reset
+- Channel 
 ### Enjoy!!
