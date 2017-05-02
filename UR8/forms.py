@@ -2,6 +2,11 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Profile, Video
 
+class UpdateVideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ['title', 'description']
+
 class UploadVideoForm(forms.ModelForm):
     class Meta:
         model = Video

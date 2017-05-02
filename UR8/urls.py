@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^reset-pwd/$', views.reset_pwd, name="reset_pwd"),
     url(r'^upload_video/$', views.upld_vid, name="upld_vid"),
     url(r'^uploaded_video/$', views.view_vid, name="view_vid"),
+    url(r'^delete-video/(\d+)/$', views.del_vid, name="del_vid"),
+    url(r'^update-video/(\d+)/$', views.updt_vid, name="updt_vid"),
 ]

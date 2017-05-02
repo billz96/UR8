@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
-from .forms import UserRegFrom, EditAvatarForm, ResetPasswordForm, UploadVideoForm
+from .forms import UserRegFrom, EditAvatarForm, ResetPasswordForm, UploadVideoForm, UpdateVideoForm
 from .models import Profile, Video
 from django.contrib.auth.models import User
 
@@ -14,6 +14,52 @@ def home(request):
     else:
         return render(request, 'sign-in.html', {})
 
+# update a video here (description and title only !):
+def updt_vid(request, id):
+    if request.method == 'GET' and request.user.is_authenticated():
+        user = request.user
+        video = user.video_set.get(id=id)
+        pk = video.id
+        form = UpdateVideoForm(instance=video)
+        return render(request, 'updt_vid.html', {'form':form, 'pk':pk})
+    elif request.method == 'POST' and request.user.is_authenticated():
+        form = UpdateVideoForm(request.POST, request.FILES)
+        user = request.user
+        video = user.video_set.get(id=id)
+        pk = video.id
+        if form.is_valid():
+            t = form.cleaned_data['title']
+            d = form.cleaned_data['description']
+
+            if video.title == t:
+                pass
+            else:
+                video.title = t
+
+            if video.description == d:
+                pass
+            else:
+                video.description = d
+
+            video.save()
+            return render(request, 'home.html', {})
+        else:
+            return render(request, 'updt_vid.html', {'form':form, 'pk':pk})
+    else:
+        return render(request, 'sign-in.html', {})
+
+# deletes a specific video
+def del_vid(request, id):
+    if request.method == 'GET' and request.user.is_authenticated():
+        user = request.user
+        video = user.video_set.get(id=id)
+        video.delete()
+        videos = user.video_set.all()
+        return render(request, 'view_vid.html', {'videos':videos})
+    else:
+        return render(request, 'sign-in.html', {})
+
+# view your uploaded videos
 def view_vid(request):
     if request.method == 'GET' and request.user.is_authenticated():
         user = request.user
@@ -22,6 +68,7 @@ def view_vid(request):
     else:
         return render(request, 'sign-in.html', {})
 
+# upload video to 'uploads/media/videos'
 def upld_vid(request):
     if request.method == 'GET' and request.user.is_authenticated():
         form = UploadVideoForm()
