@@ -22,7 +22,9 @@ It will include:
 1. Python 3
 2. Django
 3. Bootstrap
-4. psycopg2 (`pip3 install psycopg2`)
+4. Postgres
+5. psycopg2 (`pip3 install psycopg2`)
+6. A database named "DjangoDB"
 
 ## Usage
 * Clone/Download Repo Locally
@@ -33,5 +35,3 @@ It will include:
   * python3 manage.py migrate
   * python3 manage.py runserver
 * In your browser go to "http://127.0.0.1:8000/ur8/"
-
-PS: You will need to have a database named "DjangoDB".
