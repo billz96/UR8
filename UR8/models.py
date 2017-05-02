@@ -11,14 +11,15 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-# class Video(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     video = models.FileField(upload_to="videos", blank=True)
+class Video(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.FileField(upload_to="videos")
     # videos will be uploaded to: 'uploads/media/videos'
-#     avg_rating = ...
+    title = models.TextField(max_length=500)
+    description = models.TextField(max_length=3000)
 
-    # def __str__(self):
-    #     return self.user.username
+    def __str__(self):
+        return self.user.username+" "+self.title+" "+self.description
 
 # class Review(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)

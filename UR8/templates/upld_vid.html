@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Sign Up Page{% endblock %}
+{% block title %}Upload Video Page{% endblock %}
 {% block css_files %}{% load staticfiles %}{% endblock %}
 {% block body %}
 
@@ -27,26 +27,21 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="{% url 'sign_up' %}"><span class="glyphicon glyphicon-edit"></span> Sign Up</a></li>
-        {% if not request.user.is_authenticated %}
-          <li><a href="{% url 'sign_in' %}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
-        {% endif %}
-        {% if request.user.is_authenticated %}
-          <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-          <li><a href="{% url 'sign_out' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        {% endif %}
+        <li><a href="{% url 'sign_up' %}"><span class="glyphicon glyphicon-edit"></span> Sign Up</a></li>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+        <li><a href="{% url 'sign_out' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
   </div>
   </nav>
 
-  <h1>Create a New Account Here:</h1>
+  <h1>Upload Your Video Here:</h1>
   <hr>
   <br>
   <p></p>
   <br>
 
-  <form class="form-horizontal" action="{% url 'sign_up' %}" method="post">
+  <form class="form-inline" action="{% url 'upld_vid' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form %}
 
@@ -55,7 +50,9 @@
             <small><ul class="alert alert-warning" >{{ field.errors }}</ul></small>
         {% endif %}
 
-        {{ field.label_tag }} {{ field }}
+        {{ field.label_tag }}
+        <br>
+        {{ field }}
         <br>
         <p></p>
         {% if field.help_text %}
@@ -66,7 +63,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-8">
-        <button type="submit" class="btn btn-lg btn-success">Sign Up !</button>
+        <button type="submit" class="btn btn-lg btn-success">Upload Video</button>
       </div>
     </div>
 

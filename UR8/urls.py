@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^profile/$', views.profile, name="profile"),
     url(r'^edit_avatar/$', views.edit_avatar, name="edit_avatar"),
     url(r'^reset-pwd/$', views.reset_pwd, name="reset_pwd"),
+    url(r'^upload_video/$', views.upld_vid, name="upld_vid"),
+    url(r'^uploaded_video/$', views.view_vid, name="view_vid"),
 ]
