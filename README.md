@@ -1,5 +1,5 @@
 # UR8
-The hippest and hoppest.
+LATEST EDITION: https://github.com/tigerlero/UR8
 
 In this project our team will be creating a simple and **_`not beautiful`_** YouTube **_`clone`_**.
 
